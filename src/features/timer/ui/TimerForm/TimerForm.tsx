@@ -3,22 +3,17 @@ import {TimerInput} from "../TimerInput";
 import styles from './TimerForm.module.css';
 
 import plusIcon from '@/app/assets/images/plus.svg';
-import {useEffect, useReducer, useState} from 'react';
+import type {Dispatch} from "react";
+import type {TimerAction} from "../../model";
+import {useState} from "react";
 
-import { timerReducer } from '@/features/timer/model';
-import type {TimerAction, TimerState} from "../../model";
 
-const initialState = {
-    timerList: []
-};
+interface TimerFormProps {
+    dispatch: Dispatch<TimerAction>;
+}
 
-export const TimerForm = () => {
-    const [state, dispatch] = useReducer<React.Reducer<TimerState, TimerAction>>(timerReducer, initialState);
+export const TimerForm = ({ dispatch }: TimerFormProps) => {
     const [seconds, setSeconds] = useState<number>(0);
-
-    useEffect(() => {
-        console.log('Timer list updated:', state.timerList);
-    }, [state.timerList]);
 
     const handleChangeTime = (seconds: number) => {
         setSeconds(seconds);
