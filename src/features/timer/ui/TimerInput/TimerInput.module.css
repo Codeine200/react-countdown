@@ -1,0 +1,37 @@
+.timerInput {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 48px;
+    padding: 20px;
+}
+
+.number {
+    width: 65px;
+    padding: 5px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 48px;
+    font-family: 'FiraSans', sans-serif;
+    text-shadow: rgba(0, 0, 0, 0.3) 3px 3px 3px;
+}
+
+.colon {
+    font-family: 'FiraSans', sans-serif;
+    font-size: 25px;
+    text-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
+}
+
+.part {
+    display: flex;
+    flex-direction: column;
+}
+
+.unit {
+    margin: -15px 0 0 -5px;
+    text-align: center;
+    font-size: 10px;
+    text-transform: uppercase;
+}
