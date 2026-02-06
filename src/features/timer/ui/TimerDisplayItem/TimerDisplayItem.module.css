@@ -1,0 +1,16 @@
+.timerItemContainer {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px
+}
+
+.display {
+    width: 200px;
+    padding: 0 55px 0 0;
+    text-align: center;
+    font-size: 48px;
+    font-family: 'FiraSans', sans-serif;
+    text-shadow: rgba(0, 0, 0, 0.3) 3px 3px 3px;
+    font-variant-numeric: tabular-nums;
+}
