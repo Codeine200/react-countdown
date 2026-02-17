@@ -2,7 +2,7 @@ import type { TimerItem, TimerAction } from '@/features/timer/model';
 import type {Dispatch} from "react";
 
 import removeIcon from '@/app/assets/images/waste-basket.svg'
-import {getFormatTimeBySeconds, formatTime} from "@/features/timer/lib/formatTime.ts";
+import {getFormatTimeBySeconds, formatTime} from "@/features/timer/lib/formatTime";
 
 import styles from './TimerDisplayItem.module.css';
 

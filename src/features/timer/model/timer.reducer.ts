@@ -1,4 +1,4 @@
-import { TimerState, TimerAction, TimerItem } from './timer.types';
+import type { TimerState, TimerAction, TimerItem } from './timer.types';
 
 export const timerReducer = (state: TimerState, action: TimerAction): TimerState => {
     switch (action.type) {

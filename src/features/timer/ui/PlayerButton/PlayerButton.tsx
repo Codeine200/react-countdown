@@ -1,11 +1,11 @@
 import type {Dispatch} from "react";
-import type {TimerAction} from "../../model";
+import type {TimerAction, TimerItem} from "../../model";
 
 import styles from "./PlayerButton.module.css";
 import playIcon from  '@/app/assets/images/play.svg';
 
 interface PlayerButtonProps {
-    timerList: [];
+    timerList: TimerItem[];
     dispatch: Dispatch<TimerAction>;
 }
 export const PlayerButton = ({timerList, dispatch}: PlayerButtonProps) => {

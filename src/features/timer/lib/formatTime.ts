@@ -8,7 +8,7 @@ export function formatTime(time:string):string {
 }
 
 export function fixDisplaySecondsTime(time:string):string {
-    if (time.length == MAX_TIME_LENGTH && time.substring(0, 1) > 5) {
+    if (time.length == MAX_TIME_LENGTH && Number(time.substring(0, 1)) > 5) {
         return "5" + time.substring(1, 2);
     }
 

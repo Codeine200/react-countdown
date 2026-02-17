@@ -1,5 +1,4 @@
 
-import {TimerForm} from "./features/timer/ui/TimerForm";
 import {TimerWidget} from "./features/widgets/TimerWidget/TimerWidget.tsx";
 
 function App() {

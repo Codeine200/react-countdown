@@ -75,6 +75,11 @@ export const TimerInput = ({ initialSeconds, onChangeTime }: TimerInputProps) =>
         let time = seconds;
         const cursorPosition = inputSecondsRef.current?.selectionStart || 0;
 
+        console.log('key:', e.key);
+        console.log('code:', e.code);
+        console.log('nativeEvent:', e.nativeEvent);
+        console.log('e:', e);
+
         // BACKSPACE
         if (e.key === 'Backspace') {
             e.preventDefault();
