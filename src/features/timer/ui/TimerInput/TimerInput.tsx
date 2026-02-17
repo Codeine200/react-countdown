@@ -50,35 +50,45 @@ export const TimerInput = ({ initialSeconds, onChangeTime }: TimerInputProps) =>
             });
             return;
         }
+    };
 
-        // overwrite
-        if (/^[0-9]$/.test(e.key) && cursorPosition < MAX_TIME_LENGTH) {
+    const handleMinutesBeforeInput = (e: any) => {
+        const time = minutes;
+        const cursorPosition = inputMinutesRef.current?.selectionStart || 0;
+
+        const inputEvent = e.nativeEvent as InputEvent;
+        const char = inputEvent.data;
+
+        if (!char || !/^[0-9]$/.test(char)) {
             e.preventDefault();
-            if (time.length >= MAX_TIME_LENGTH) {
-                time = replaceChar(time, cursorPosition, e.key);
-            } else {
-                time = insertChar(time, cursorPosition, e.key);
-            }
-            setMinutes(clearMinutes(time));
-            requestAnimationFrame(() => {
-                if (time.length == 2 && cursorPosition != 0) {
-                    inputSecondsRef.current?.focus();
-                    inputSecondsRef.current?.setSelectionRange(0, 0);
-                    return;
-                }
-                inputMinutesRef.current?.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
-            });
+            return;
         }
+
+        e.preventDefault();
+
+        let newTime: string;
+
+        if (time.length >= MAX_TIME_LENGTH) {
+            newTime = replaceChar(time, cursorPosition, char);
+        } else {
+            newTime = insertChar(time, cursorPosition, char);
+        }
+
+        setMinutes(clearMinutes(newTime));
+
+        requestAnimationFrame(() => {
+            if (time.length == 2 && cursorPosition != 0) {
+                inputSecondsRef.current?.focus();
+                inputSecondsRef.current?.setSelectionRange(0, 0);
+                return;
+            }
+            inputMinutesRef.current?.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+        });
     };
 
     const onchangeSecondHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         let time = seconds;
         const cursorPosition = inputSecondsRef.current?.selectionStart || 0;
-
-        console.log('key:', e.key);
-        console.log('code:', e.code);
-        console.log('nativeEvent:', e.nativeEvent);
-        console.log('e:', e);
 
         // BACKSPACE
         if (e.key === 'Backspace') {
@@ -102,26 +112,41 @@ export const TimerInput = ({ initialSeconds, onChangeTime }: TimerInputProps) =>
             });
             return;
         }
-
-        // overwrite
-        if (/^[0-9]$/.test(e.key) && cursorPosition < MAX_TIME_LENGTH) {
-            e.preventDefault();
-            if (time.length >= MAX_TIME_LENGTH) {
-                time = replaceChar(time, cursorPosition, e.key);
-            } else {
-                time = insertChar(time, cursorPosition, e.key);
-            }
-            setSeconds(clearSeconds(time));
-            requestAnimationFrame(() => {
-                inputSecondsRef.current?.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
-            });
-        }
     };
 
     const onBlurHandle = (e: React.FocusEvent<HTMLInputElement>) => {
         const { name, value } = e.currentTarget;
         name == 'minutes' ? setMinutes(formatTime(value)) : setSeconds(formatTime(value));
     }
+
+    const handleSecondBeforeInput = (e: any) => {
+        const time = seconds;
+        const cursorPosition = inputSecondsRef.current?.selectionStart || 0;
+
+        const inputEvent = e.nativeEvent as InputEvent;
+        const char = inputEvent.data;
+
+        if (!char || !/^[0-9]$/.test(char)) {
+            e.preventDefault();
+            return;
+        }
+
+        e.preventDefault();
+
+        let newTime: string;
+
+        if (time.length >= MAX_TIME_LENGTH) {
+            newTime = replaceChar(time, cursorPosition, char);
+        } else {
+            newTime = insertChar(time, cursorPosition, char);
+        }
+
+        setSeconds(clearSeconds(newTime));
+
+        requestAnimationFrame(() => {
+            inputSecondsRef.current?.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+        });
+    };
 
 
     return (
@@ -136,6 +161,8 @@ export const TimerInput = ({ initialSeconds, onChangeTime }: TimerInputProps) =>
                            onKeyDown={onchangeMinutesHandler}
                            value={minutes}
                            className={styles.number}
+                           onBeforeInput={handleMinutesBeforeInput}
+                           inputMode="numeric"
                     />
                     <div className={styles.unit}>minutes</div>
                 </div>
@@ -149,6 +176,8 @@ export const TimerInput = ({ initialSeconds, onChangeTime }: TimerInputProps) =>
                            onKeyDown={onchangeSecondHandler}
                            value={seconds}
                            className={styles.number}
+                           onBeforeInput={handleSecondBeforeInput}
+                           inputMode="numeric"
                     />
                     <div className={styles.unit}>seconds</div>
                 </div>
