@@ -19,8 +19,9 @@ export const Clock = ({timerItem}: ClockProps) => {
 
     useEffect(() => {
         const deg = getCurrentDegPosition(timerItem);
-        if (clock.current) {
-            clock.current.style.background = `conic-gradient(#4caf50 0deg ${deg}deg, #e0e0e0 ${deg}deg 360deg)`;
+        if (clock.current) { // when 5% of the time is left
+            const color = (deg <= 342) ? '#4caf50' : '#D32F2F';
+            clock.current.style.background = `conic-gradient(${color} 0deg ${deg}deg, #e0e0e0 ${deg}deg 360deg)`;
         }
     }, [timerItem.currentTimeInSeconds]);
 
