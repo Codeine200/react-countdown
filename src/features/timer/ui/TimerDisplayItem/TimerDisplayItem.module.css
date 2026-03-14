@@ -14,3 +14,10 @@
     text-shadow: rgba(0, 0, 0, 0.3) 3px 3px 3px;
     font-variant-numeric: tabular-nums;
 }
+
+.number {
+    color: #576067;
+    align-items: center;
+    display: flex;
+    font-size: 20px;
+}

@@ -8,10 +8,11 @@ type TimerListProps = {
 };
 
 export const TimerList = ({ timerList, dispatch }: TimerListProps) => {
+    let number = timerList.length + 1;
     return (
         <>
             {timerList.map(timer => (
-                <TimerDisplayItem timerItem={timer} dispatch={dispatch} key={timer.id} />
+                <TimerDisplayItem number={--number} timerItem={timer} dispatch={dispatch} key={timer.id} />
             ))}
         </>
     )
